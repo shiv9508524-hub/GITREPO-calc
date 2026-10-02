@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="calculator-container">
+    <header class="calculator-header">
+      <span class="app-title">CALCULATOR</span>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </header>
+
+    <!-- Display Screen: Shows ongoing expression and current input / result -->
+    <div class="display-screen" id="displayScreen">
+      <div class="previous-operand" id="previousOperand"></div>
+      <div class="current-operand" id="currentOperand">0</div>
+    </div>
+
+    <!-- Keypad: Aligned using CSS Grid -->
+    <div class="keypad-grid" id="keypadGrid">
+      <!-- Special Action Keys -->
+      <button class="btn btn-action" data-action="clear">AC</button>
+      <button class="btn btn-action" data-action="delete">DEL</button>
+      <button class="btn btn-action" data-action="percent">%</button>
+      <button class="btn btn-operator" data-operator="/">÷</button>
+
+      <!-- Number and Operator Keys -->
+      <button class="btn btn-number" data-number="7">7</button>
+      <button class="btn btn-number" data-number="8">8</button>
+      <button class="btn btn-number" data-number="9">9</button>
+      <button class="btn btn-operator" data-operator="*">×</button>
+
+      <button class="btn btn-number" data-number="4">4</button>
+      <button class="btn btn-number" data-number="5">5</button>
+      <button class="btn btn-number" data-number="6">6</button>
+      <button class="btn btn-operator" data-operator="-">−</button>
+
+      <button class="btn btn-number" data-number="1">1</button>
+      <button class="btn btn-number" data-number="2">2</button>
+      <button class="btn btn-number" data-number="3">3</button>
+      <button class="btn btn-operator" data-operator="+">+</button>
+
+      <!-- Bottom Row with Span -->
+      <button class="btn btn-number btn-zero" data-number="0">0</button>
+      <button class="btn btn-number" data-action="decimal">.</button>
+      <button class="btn btn-equals" data-action="calculate">=</button>
+    </div>
+
+    <!-- Keyboard Hint / Instructions Footer -->
+    <footer class="calculator-footer">
+      <p>⌨️ Supports standard keyboard input & Numpad</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

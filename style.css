@@ -1,0 +1,333 @@
+/* ==========================================================================
+   INTERACTIVE CALCULATOR STYLESHEET
+   Features: CSS Grid Layout, CSS Variables for Dark/Light Mode, Responsive Design
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Theme Variables & Global Reset
+   -------------------------------------------------------------------------- */
+:root {
+  /* Dark Theme (Default) */
+  --bg-gradient: radial-gradient(circle at 50% 20%, #1e2640 0%, #0d111a 100%);
+  --calc-bg: rgba(22, 27, 46, 0.85);
+  --calc-border: rgba(255, 255, 255, 0.08);
+  --calc-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.08);
+  
+  --screen-bg: rgba(13, 17, 26, 0.7);
+  --screen-border: rgba(255, 255, 255, 0.05);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-accent: #38bdf8;
+  
+  --btn-num-bg: rgba(255, 255, 255, 0.05);
+  --btn-num-hover: rgba(255, 255, 255, 0.12);
+  --btn-num-active: rgba(255, 255, 255, 0.18);
+  --btn-num-text: #f1f5f9;
+  
+  --btn-action-bg: rgba(239, 68, 68, 0.15);
+  --btn-action-hover: rgba(239, 68, 68, 0.25);
+  --btn-action-active: rgba(239, 68, 68, 0.35);
+  --btn-action-text: #f87171;
+  
+  --btn-op-bg: rgba(56, 189, 248, 0.15);
+  --btn-op-hover: rgba(56, 189, 248, 0.25);
+  --btn-op-active: rgba(56, 189, 248, 0.35);
+  --btn-op-text: #38bdf8;
+  
+  --btn-equals-bg: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  --btn-equals-hover: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  --btn-equals-active: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%);
+  --btn-equals-text: #ffffff;
+  --btn-equals-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+
+  --footer-text: #64748b;
+}
+
+/* Light Theme Variables */
+body.light-theme {
+  --bg-gradient: radial-gradient(circle at 50% 20%, #e0f2fe 0%, #f1f5f9 100%);
+  --calc-bg: rgba(255, 255, 255, 0.9);
+  --calc-border: rgba(0, 0, 0, 0.08);
+  --calc-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.12), 0 0 30px rgba(14, 165, 233, 0.1);
+  
+  --screen-bg: rgba(241, 245, 249, 0.9);
+  --screen-border: rgba(0, 0, 0, 0.06);
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-accent: #0284c7;
+  
+  --btn-num-bg: #f8fafc;
+  --btn-num-hover: #e2e8f0;
+  --btn-num-active: #cbd5e1;
+  --btn-num-text: #1e293b;
+  
+  --btn-action-bg: rgba(239, 68, 68, 0.1);
+  --btn-action-hover: rgba(239, 68, 68, 0.2);
+  --btn-action-active: rgba(239, 68, 68, 0.3);
+  --btn-action-text: #dc2626;
+  
+  --btn-op-bg: rgba(14, 165, 233, 0.12);
+  --btn-op-hover: rgba(14, 165, 233, 0.22);
+  --btn-op-active: rgba(14, 165, 233, 0.32);
+  --btn-op-text: #0284c7;
+
+  --btn-equals-bg: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  --btn-equals-hover: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+  --btn-equals-active: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+  --btn-equals-text: #ffffff;
+  --btn-equals-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+
+  --footer-text: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  padding: 20px;
+  transition: background 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. Main Calculator Container
+   -------------------------------------------------------------------------- */
+.calculator-container {
+  width: 100%;
+  max-width: 380px;
+  background: var(--calc-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--calc-border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: var(--calc-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Header & Theme Toggle */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.app-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
+
+.theme-toggle {
+  background: var(--btn-num-bg);
+  border: 1px solid var(--calc-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--btn-num-hover);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   3. Calculator Display Screen
+   -------------------------------------------------------------------------- */
+.display-screen {
+  background: var(--screen-bg);
+  border: 1px solid var(--screen-border);
+  border-radius: 18px;
+  padding: 18px 20px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  word-break: break-all;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.previous-operand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  min-height: 1.3rem;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.current-operand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  transition: color 0.2s ease, font-size 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   4. Keypad - CSS Grid Layout
+   -------------------------------------------------------------------------- */
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 60px);
+  gap: 12px;
+}
+
+/* Base Button Styles */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn:active,
+.btn.pressed {
+  transform: scale(0.93);
+}
+
+/* Number Buttons */
+.btn-number {
+  background: var(--btn-num-bg);
+  color: var(--btn-num-text);
+  border-color: var(--calc-border);
+}
+
+.btn-number:hover {
+  background: var(--btn-num-hover);
+}
+
+.btn-number:active,
+.btn-number.pressed {
+  background: var(--btn-num-active);
+}
+
+/* Action Buttons (AC, DEL, %) */
+.btn-action {
+  background: var(--btn-action-bg);
+  color: var(--btn-action-text);
+  font-weight: 600;
+}
+
+.btn-action:hover {
+  background: var(--btn-action-hover);
+}
+
+.btn-action:active,
+.btn-action.pressed {
+  background: var(--btn-action-active);
+}
+
+/* Operator Buttons (+, -, ×, ÷) */
+.btn-operator {
+  background: var(--btn-op-bg);
+  color: var(--btn-op-text);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.btn-operator:hover {
+  background: var(--btn-op-hover);
+}
+
+.btn-operator:active,
+.btn-operator.pressed {
+  background: var(--btn-op-active);
+}
+
+/* Equals Button */
+.btn-equals {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+  box-shadow: var(--btn-equals-shadow);
+}
+
+.btn-equals:hover {
+  background: var(--btn-equals-hover);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+}
+
+.btn-equals:active,
+.btn-equals.pressed {
+  background: var(--btn-equals-active);
+}
+
+/* Zero button span */
+.btn-zero {
+  grid-column: span 2;
+  justify-content: flex-start;
+  padding-left: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Footer / Instructions
+   -------------------------------------------------------------------------- */
+.calculator-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--footer-text);
+  padding-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 420px) {
+  .calculator-container {
+    max-width: 100%;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .keypad-grid {
+    grid-template-rows: repeat(5, 54px);
+    gap: 10px;
+  }
+
+  .current-operand {
+    font-size: 1.9rem;
+  }
+
+  .btn {
+    font-size: 1.15rem;
+    border-radius: 14px;
+  }
+}
